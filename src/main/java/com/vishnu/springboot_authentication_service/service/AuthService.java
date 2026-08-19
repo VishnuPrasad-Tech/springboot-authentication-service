@@ -2,6 +2,7 @@ package com.vishnu.springboot_authentication_service.service;
 
 import com.vishnu.springboot_authentication_service.dto.requestDTO.LoginRequest;
 import com.vishnu.springboot_authentication_service.dto.requestDTO.SignupRequest;
+import com.vishnu.springboot_authentication_service.dto.responseDTO.SignupResponse;
 import com.vishnu.springboot_authentication_service.entity.User;
 import com.vishnu.springboot_authentication_service.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +21,7 @@ public class AuthService {
 
 
 
-    public void signup(SignupRequest request){
+    public SignupResponse signup(SignupRequest request){
         if(userRepository.findByEmail(request.getEmail()).isPresent()){
             throw new RuntimeException("Email already registered");
         }
@@ -28,6 +29,8 @@ public class AuthService {
 
         User user= new User(request.getEmail(), passwordHash);
         userRepository.save(user);
+
+        return new SignupResponse("User Registered Successfully");
     }
 
     public void login(LoginRequest request){
