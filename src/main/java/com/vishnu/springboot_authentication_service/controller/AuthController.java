@@ -2,6 +2,7 @@ package com.vishnu.springboot_authentication_service.controller;
 
 import com.vishnu.springboot_authentication_service.dto.requestDTO.LoginRequest;
 import com.vishnu.springboot_authentication_service.dto.requestDTO.SignupRequest;
+import com.vishnu.springboot_authentication_service.dto.responseDTO.LoginResponse;
 import com.vishnu.springboot_authentication_service.dto.responseDTO.SignupResponse;
 import com.vishnu.springboot_authentication_service.service.AuthService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,8 +25,8 @@ public class AuthController {
     }
 
     @PostMapping("/auth/login")
-    public void login(@RequestBody LoginRequest request){
-        authService.login(request);
+    public LoginResponse login(@RequestBody LoginRequest request){
+        return authService.login(request);
     }
 
 
